@@ -99,7 +99,15 @@ def create_historical_performance(sender, instance, created, **kwargs):
             fulfillment_rate=instance.fulfillment_rate
         )
 
-
+    else:
+        # If the Vendor is updated, update the existing HistoricalPerformance instance
+        historical_performance = HistoricalPerformance.objects.filter(vendor=instance).latest('date')
+        historical_performance.date = timezone.now()
+        historical_performance.on_time_delivery_rate = instance.on_time_delivery_rate
+        historical_performance.quality_rating_avg = instance.quality_rating_avg
+        historical_performance.average_response_time = instance.average_response_time
+        historical_performance.fulfillment_rate = instance.fulfillment_rate
+        historical_performance.save()
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE , default=None , null=True)
@@ -111,7 +119,7 @@ class UserProfile(models.Model):
 
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
-    print(instance)
+    print(instance,'-=--=-=--=-=-=-=')
     
     if created:
         user_profile = UserProfile.objects.create(user=instance)
