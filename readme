@@ -10,6 +10,8 @@ Below is the outlined configuration process for the project:
 
 4:- django-admin details = username:- admin / password:- admin
 
+5:- Signals add in models.py file 
+
 Thank you for your attention to these instructions. Should you have any questions or require further assistance, please don't hesitate to ask.
 
 Best regards,
