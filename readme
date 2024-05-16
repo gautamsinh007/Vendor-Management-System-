@@ -8,7 +8,9 @@ Below is the outlined configuration process for the project:
 
 3:- Within the project, navigate to the app/urls.py file. This file is responsible for executing operations based on the provided endpoints.
 
+4:- django-admin details = username:- admin / password:- admin
+
 Thank you for your attention to these instructions. Should you have any questions or require further assistance, please don't hesitate to ask.
 
 Best regards,
-
+Gautam Makwana
