@@ -1,0 +1,14 @@
+Hello greetings of the day,
+
+Below is the outlined configuration process for the project:
+
+1:- Begin by installing all dependencies, including Django.
+
+2:- Run the project using the command python manage.py runserver.
+
+3:- Within the project, navigate to the app/urls.py file. This file is responsible for executing operations based on the provided endpoints.
+
+Thank you for your attention to these instructions. Should you have any questions or require further assistance, please don't hesitate to ask.
+
+Best regards,
+

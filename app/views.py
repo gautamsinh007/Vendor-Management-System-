@@ -1,18 +1,11 @@
-from django.shortcuts import render 
-from rest_framework import routers, serializers, viewsets
 from .models import *
 from rest_framework import status
 from django.contrib.auth.models import User
 from .serializers import * 
 from  rest_framework.views import APIView
 from rest_framework.response import Response
-from django.contrib.auth import authenticate
-from rest_framework_simplejwt.tokens import RefreshToken
-from rest_framework.permissions import IsAuthenticated
 
 # Create your views here.
-# this is 
-
 class VenderApiview(APIView):
     def get(self, request, id=None, vid=None):
         try:
@@ -57,8 +50,6 @@ class VenderApiview(APIView):
             return Response("Vendor deleted", status=status.HTTP_204_NO_CONTENT)
         except Vendor.DoesNotExist:
             return Response("Vendor not found", status=status.HTTP_404_NOT_FOUND)
-
-   
 
 class PurchaseorderApi(APIView):
     def get(self, request, id=None,  vid=None):
@@ -106,7 +97,6 @@ class PurchaseorderApi(APIView):
         except:
             return Response("purchaseorder dddnot found", status=status.HTTP_404_NOT_FOUND)
 
-
 class HistoricalPerApi(APIView):
     def get(self, request, id=None):
         try:
@@ -148,4 +138,3 @@ class HistoricalPerApi(APIView):
             return Response("HistoricalPerformance deleted", status=status.HTTP_204_NO_CONTENT)
         except:
             return Response("HistoricalPerformance dddnot found", status=status.HTTP_404_NOT_FOUND)
-
