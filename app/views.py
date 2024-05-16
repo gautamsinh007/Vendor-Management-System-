@@ -14,7 +14,6 @@ from rest_framework.permissions import IsAuthenticated
 # this is 
 
 class VenderApiview(APIView):
-
     def get(self, request, id=None, vid=None):
         try:
             if id:
@@ -62,9 +61,6 @@ class VenderApiview(APIView):
    
 
 class PurchaseorderApi(APIView):
-
-
-   
     def get(self, request, id=None,  vid=None):
         try:
             if id:
@@ -112,7 +108,6 @@ class PurchaseorderApi(APIView):
 
 
 class HistoricalPerApi(APIView):
-
     def get(self, request, id=None):
         try:
             if id:

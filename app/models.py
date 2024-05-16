@@ -20,8 +20,7 @@ class Vendor(models.Model):
 
     def __str__(self):
         return self.name
-
-
+    
 class PurchaseOrder(models.Model):
     po_number = models.CharField(max_length=50, unique=True)
     vendor = models.ForeignKey(Vendor, on_delete=models.CASCADE)
@@ -36,8 +35,6 @@ class PurchaseOrder(models.Model):
 
     def __str__(self):
         return self.po_number
-
-
 
 @receiver(pre_save, sender=PurchaseOrder)
 def update_metrics_on_acknowledgment(sender, instance, **kwargs):
@@ -73,7 +70,6 @@ def calculate_fulfillment_rate(vendor):
     successful_fulfillments = total_orders.filter(status='completed').count()
     return successful_fulfillments / total_orders.count() if total_orders.count() > 0 else 0       
 
-
 class HistoricalPerformance(models.Model):
     vendor = models.ForeignKey(Vendor, on_delete=models.CASCADE)
     date = models.DateTimeField(null=True)
@@ -84,7 +80,6 @@ class HistoricalPerformance(models.Model):
     
     def __str__(self):
         return f"{self.vendor.name} - {self.date}"
-
 
 @receiver(post_save, sender=Vendor)
 def create_historical_performance(sender, instance, created, **kwargs):
@@ -100,10 +95,10 @@ def create_historical_performance(sender, instance, created, **kwargs):
         )
     else:
         # If the Vendor is updated, update the existing HistoricalPerformance instance
-        historical_performance = HistoricalPerformance.objects.filter(vendor=instance).latest('date')
-        historical_performance.date = timezone.now()
-        historical_performance.on_time_delivery_rate = instance.on_time_delivery_rate
-        historical_performance.quality_rating_avg = instance.quality_rating_avg
-        historical_performance.average_response_time = instance.average_response_time
-        historical_performance.fulfillment_rate = instance.fulfillment_rate
-        historical_performance.save()
+        hist_performance = HistoricalPerformance.objects.filter(vendor=instance).latest('date')
+        hist_performance.date = timezone.now()
+        hist_performance.on_time_delivery_rate = instance.on_time_delivery_rate
+        hist_performance.quality_rating_avg = instance.quality_rating_avg
+        hist_performance.average_response_time = instance.average_response_time
+        hist_performance.fulfillment_rate = instance.fulfillment_rate
+        hist_performance.save()
